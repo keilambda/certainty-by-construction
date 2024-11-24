@@ -22,3 +22,23 @@ module Definition where
 
   sym : {A : Set} {x y : A} → x ≡ y → y ≡ x
   sym refl = refl
+
+module Playground where
+  open import Relation.Binary.PropositionalEquality using (_≡_; refl; cong)
+  open Chapter2-Numbers
+
+  _ : suc (suc (suc zero)) ≡ suc (suc (suc zero))
+  _ = refl
+
+  _ : three ≡ suc (suc (suc zero))
+  _ = refl
+
+  _ : three ≡ one + two
+  _ = refl
+
+  0+x=x : (x : ℕ) → zero + x ≡ x
+  0+x=x _ = refl
+
+  x+0=x : (x : ℕ) → x + zero ≡ x
+  x+0=x zero = refl
+  x+0=x (suc x) = cong suc (x+0=x x)
